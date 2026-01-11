@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea Schedule Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="ocean" id="ocean"></div>
+
+    <header>
+        <div class="logo">OceanApp</div>
+        <div class="nav-container">
+            <button class="menu-btn" onclick="toggleMenu()">Pilih Menu ▾</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="https://google.com" target="_blank">📋 Daftar Tugas</a>
+                <a href="https://wikipedia.org" target="_blank">⏰ Waktu Pelajaran</a>
+                <a href="#" onclick="showSchedule()">📅 Jadwal Hari Ini</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h1>Jadwal Pelajaran</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hari</th>
+                        <th>Mata Pelajaran</th>
+                        <th>Jam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="day-badge">SENIN</span></td>
+                        <td>Matematika Dasar</td>
+                        <td>08:00 - 10:00</td>
+                    </tr>
+                    <tr>
+                        <td><span class="day-badge">SELASA</span></td>
+                        <td>Bahasa Indonesia</td>
+                        <td>08:00 - 10:00</td>
+                    </tr>
+                    <tr>
+                        <td><span class="day-badge">RABU</span></td>
+                        <td>Ilmu Pengetahuan Alam</td>
+                        <td>10:30 - 12:00</td>
+                    </tr>
+                    <tr>
+                        <td><span class="day-badge">KAMIS</span></td>
+                        <td>Seni Budaya</td>
+                        <td>07:30 - 09:00</td>
+                    </tr>
+                    <tr>
+                        <td><span class="day-badge">JUMAT</span></td>
+                        <td>Olahraga</td>
+                        <td>07:00 - 09:00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
