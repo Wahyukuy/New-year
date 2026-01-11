@@ -18,10 +18,35 @@ window.onclick = function(event) {
 
 // Fungsi tambahan untuk tombol jadwal
 function showSchedule() {
-    alert("Menampilkan Jadwal Hari Ini!");
-    toggleMenu(); // Menutup menu setelah klik
-}
+    // 1. Dapatkan hari ini dalam bahasa Indonesia
+    const daftarHari = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
+    const hariIni = daftarHari[new Date().getDay()];
 
+    // 2. Ambil semua baris jadwal
+    const semuaBaris = document.querySelectorAll("#jadwal-body tr");
+    let ditemukan = false;
+
+    semuaBaris.forEach(baris => {
+        // 3. Sembunyikan semua baris dulu
+        baris.style.display = "none";
+
+        // 4. Jika hari di baris cocok dengan hari ini, tampilkan!
+        if (baris.getAttribute("data-hari") === hariIni) {
+            baris.style.display = "table-row";
+            ditemukan = true;
+        }
+    });
+
+    if (!ditemukan) {
+        alert("Hari ini (" + hariIni + ") tidak ada jadwal pelajaran. Waktunya istirahat! 🌊");
+        // Tampilkan semua jika libur agar tidak kosong banget
+        semuaBaris.forEach(baris => baris.style.display = "table-row");
+    } else {
+        alert("Menampilkan jadwal khusus hari " + hariIni);
+    }
+
+    toggleMenu(); // Tutup menu dropdown
+}
 // Membuat efek gelembung secara otomatis
 function createBubbles() {
     const ocean = document.getElementById('ocean');
