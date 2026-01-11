@@ -13,14 +13,28 @@
 
     <header>
         <div class="logo">OceanApp</div>
-        <div class="nav-container">
-            <button class="menu-btn" onclick="toggleMenu()">Pilih Menu ▾</button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="https://google.com" target="_blank">📋 Daftar Tugas</a>
-                <a href="https://wikipedia.org" target="_blank">⏰ Waktu Pelajaran</a>
-                <a href="#" onclick="showSchedule()">📅 Jadwal Hari Ini</a>
-            </div>
-        </div>
+        <div class="container">
+    <div id="welcome-screen" class="welcome-card">
+        <h1 class="quote">"Hidup Untuk makan, dan makan untuk hidup"</h1>
+        <p class="sub-quote">~ Pro Player ~</p>
+    </div>
+
+    <div id="schedule-card" class="card" style="display: none;">
+        <h1 id="judul-jadwal">Jadwal Pelajaran</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hari</th>
+                    <th>Mata Pelajaran</th>
+                    <th>Jam</th>
+                </tr>
+            </thead>
+            <tbody id="jadwal-body">
+                </tbody>
+        </table>
+        <button class="back-btn" onclick="goBack()"> Kembali </button>
+    </div>
+</div>
     </header>
 
     <div class="container">
