@@ -13,23 +13,14 @@
 
     <header>
         <div class="logo">OceanApp</div>
-        <div class="container">
-    <div id="schedule-card" class="card">
-        <h1 id="judul-jadwal">Memuat Jadwal...</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Hari</th>
-                    <th>Mata Pelajaran</th>
-                    <th>Jam</th>
-                </tr>
-            </thead>
-            <tbody id="jadwal-body">
-                </tbody>
-        </table>
-      </div>
-     </div>
-        
+        <div class="nav-container">
+            <button class="menu-btn" onclick="toggleMenu()">Pilih Menu ▾</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="https://google.com" target="_blank">📋 Daftar Tugas</a>
+                <a href="https://wikipedia.org" target="_blank">⏰ Waktu Pelajaran</a>
+                <a href="#" onclick="showSchedule()">📅 Jadwal Hari Ini</a>
+            </div>
+        </div>
     </header>
 
     <div class="container">
