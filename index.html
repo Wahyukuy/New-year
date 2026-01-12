@@ -13,14 +13,34 @@
 
     <header>
         <div class="logo">OceanApp</div>
-        <div class="nav-container">
-            <button class="menu-btn" onclick="toggleMenu()">Pilih Menu ▾</button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="https://google.com" target="_blank">📋 Daftar Tugas</a>
-                <a href="https://wikipedia.org" target="_blank">⏰ Waktu Pelajaran</a>
-                <a href="#" onclick="showSchedule()">📅 Jadwal Hari Ini</a>
-            </div>
+        <div class="container">
+    <div id="schedule-card" class="card">
+        <h1 id="judul-jadwal">Jadwal Pelajaran</h1>
+        <p style="font-size: 0.8em; color: var(--coral);">*Ketuk pada teks untuk mengubah jadwal</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Hari</th>
+                    <th>Mata Pelajaran</th>
+                    <th>Jam</th>
+                </tr>
+            </thead>
+            <tbody id="jadwal-body" contenteditable="true">
+                </tbody>
+        </table>
+        <button class="menu-btn" onclick="saveJadwalOffline()" style="margin-top: 15px;">💾 Simpan Perubahan</button>
+    </div>
+
+    <div id="task-card" class="card" style="margin-top: 20px;">
+        <h2>📌 Daftar Tugas</h2>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <input type="text" id="taskInput" placeholder="Ketik tugas baru..." style="flex: 1; padding: 10px; border-radius: 10px; border: none;">
+            <button onclick="addTask()" class="menu-btn">Tambah</button>
         </div>
+        <ul id="taskList"></ul>
+    </div>
+</div>
     </header>
 
     <div class="container">
