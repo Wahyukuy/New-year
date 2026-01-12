@@ -18,44 +18,10 @@ window.onclick = function(event) {
 
 // Fungsi tambahan untuk tombol jadwal
 function showSchedule() {
-    // 1. Ambil data hari saat ini
-    const daftarHari = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
-    const hariIni = daftarHari[new Date().getDay()];
-
-    // 2. Sembunyikan layar kutipan, tampilkan layar jadwal
-    document.getElementById("welcome-screen").style.display = "none";
-    const scheduleCard = document.getElementById("schedule-card");
-    scheduleCard.style.display = "block";
-
-    // 3. Filter jadwal
-    const semuaBaris = document.querySelectorAll("#jadwal-body tr");
-    let adaJadwal = false;
-
-    semuaBaris.forEach(baris => {
-        if (baris.getAttribute("data-hari") === hariIni) {
-            baris.style.display = "table-row";
-            adaJadwal = true;
-        } else {
-            baris.style.display = "none";
-        }
-    });
-
-    // 4. Update Judul
-    const judul = document.getElementById("judul-jadwal");
-    if (adaJadwal) {
-        judul.innerText = "Jadwal Hari " + hariIni;
-    } else {
-        judul.innerText = "Hari Ini Libur! 🌊";
-    }
-
-    toggleMenu(); // Tutup dropdown
+    alert("Menampilkan Jadwal Hari Ini!");
+    toggleMenu(); // Menutup menu setelah klik
 }
 
-// Fungsi untuk kembali ke tampilan kutipan
-function goBack() {
-    document.getElementById("welcome-screen").style.display = "block";
-    document.getElementById("schedule-card").style.display = "none";
-}
 // Membuat efek gelembung secara otomatis
 function createBubbles() {
     const ocean = document.getElementById('ocean');
@@ -95,38 +61,33 @@ function addBubble() {
 // Jalankan fungsi gelembung saat halaman dimuat
 document.addEventListener('DOMContentLoaded', createBubbles);
 
-// Fungsi utama untuk filter jadwal hari ini
 function showSchedule() {
+    // 1. Dapatkan hari ini dalam bahasa Indonesia
     const daftarHari = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
     const hariIni = daftarHari[new Date().getDay()];
 
+    // 2. Ambil semua baris jadwal
     const semuaBaris = document.querySelectorAll("#jadwal-body tr");
-    let adaJadwal = false;
+    let ditemukan = false;
 
     semuaBaris.forEach(baris => {
+        // 3. Sembunyikan semua baris dulu
+        baris.style.display = "none";
+
+        // 4. Jika hari di baris cocok dengan hari ini, tampilkan!
         if (baris.getAttribute("data-hari") === hariIni) {
             baris.style.display = "table-row";
-            adaJadwal = true;
-        } else {
-            baris.style.display = "none";
+            ditemukan = true;
         }
     });
 
-    const judul = document.getElementById("judul-jadwal");
-    if (adaJadwal) {
-        judul.innerText = "Jadwal Hari " + hariIni;
+    if (!ditemukan) {
+        alert("Hari ini (" + hariIni + ") tidak ada jadwal pelajaran. Waktunya istirahat! 🌊");
+        // Tampilkan semua jika libur agar tidak kosong banget
+        semuaBaris.forEach(baris => baris.style.display = "table-row");
     } else {
-        judul.innerText = "Hari Ini Libur! 🌊";
+        alert("Menampilkan jadwal khusus hari " + hariIni);
     }
-}
 
-// OTOMATIS JALANKAN SAAT APLIKASI DIBUKA
-window.onload = function() {
-    createBubbles(); // Jalankan efek gelembung
-    showSchedule();  // Langsung filter jadwal hari ini
-};
-
-// Fungsi toggle menu tetap sama seperti sebelumnya
-function toggleMenu() {
-    document.getElementById("myDropdown").classList.toggle("show");
+    toggleMenu(); // Tutup menu dropdown
 }
