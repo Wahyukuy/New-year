@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Sea Tasks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Tambahan khusus tema Laut Dalam */
+        body { background: linear-gradient(180deg, #001219 0%, #000000 100%); }
+        .deadline-input {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+        }
+        .task-item {
+            background: rgba(10, 147, 150, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border-left: 5px solid #ee9b00; /* Warna koral untuk penanda */
+        }
+    </style>
+</head>
+<body>
+    <div class="ocean" id="ocean"></div>
+    
+    <header>
+        <div class="logo">Deep Sea Tasks</div>
+        <a href="index.html" class="menu-btn" style="text-decoration: none;">🏠 Kembali ke Jadwal</a>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h1>📌 Daftar Tugas & Deadline</h1>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                <input type="text" id="taskInput" placeholder="Nama Tugas..." class="deadline-input">
+                <input type="date" id="dateInput" class="deadline-input">
+                <button onclick="addNewTask()" class="menu-btn">Tambah Tugas Baru</button>
+            </div>
+            
+            <div id="taskListContainer">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Logika khusus halaman tugas
+        function addNewTask() {
+            const taskName = document.getElementById('taskInput').value;
+            const deadline = document.getElementById('dateInput').value;
+            
+            if (taskName === '' || deadline === '') {
+                alert("Isi nama tugas dan tanggalnya ya!");
+                return;
+            }
+
+            const taskObj = {
+                id: Date.now(),
+                name: taskName,
+                date: deadline
+            };
+
+            displayTask(taskObj);
+            saveTaskToLocal(taskObj);
+            
+            document.getElementById('taskInput').value = '';
+            document.getElementById('dateInput').value = '';
+        }
+
+        function displayTask(task) {
+            const container = document.getElementById('taskListContainer');
+            const div = document.createElement('div');
+            div.className = 'task-item';
+            div.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong style="font-size: 1.1em; color: #0a9396;">${task.name}</strong><br>
+                        <small style="color: #e9d8a6;">📅 Deadline: ${task.date}</small>
+                    </div>
+                    <button onclick="deleteTask(${task.id}, this)" style="background: #ae2012; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">Selesai</button>
+                </div>
+            `;
+            container.appendChild(div);
+        }
+
+        function saveTaskToLocal(task) {
+            let tasks = JSON.parse(localStorage.getItem('deepSeaTasks')) || [];
+            tasks.push(task);
+            localStorage.setItem('deepSeaTasks', JSON.stringify(tasks));
+        }
+
+        function deleteTask(id, btn) {
+            btn.closest('.task-item').remove();
+            let tasks = JSON.parse(localStorage.getItem('deepSeaTasks'));
+            tasks = tasks.filter(t => t.id !== id);
+            localStorage.setItem('deepSeaTasks', JSON.stringify(tasks));
+        }
+
+        // Muat data saat halaman dibuka
+        window.onload = function() {
+            createBubbles(); // Tetap panggil gelembung dari script.js
+            const saved = JSON.parse(localStorage.getItem('deepSeaTasks')) || [];
+            saved.forEach(t => displayTask(t));
+        }
+    </script>
+</body>
+</html>
