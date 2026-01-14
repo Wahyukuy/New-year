@@ -188,6 +188,63 @@ setInterval(checkDeadlines, 1800000);
             const saved = JSON.parse(localStorage.getItem('deepSeaTasks')) || [];
             saved.forEach(t => displayTask(t));
         }
+        function checkExpiredTasks() {
+    let tasks = JSON.parse(localStorage.getItem('deepSeaTasks')) || [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset waktu ke jam 00:00 agar adil
+
+    let adaYangLewat = false;
+    let namaTugasLewat = [];
+
+    // Filter tugas: ambil yang belum lewat, buang yang sudah lewat
+    const tasksTetapAda = tasks.filter(task => {
+        const deadlineDate = new Date(task.date);
+        deadlineDate.setHours(0, 0, 0, 0);
+
+        if (deadlineDate < today) {
+            adaYangLewat = true;
+            namaTugasLewat.push(task.name);
+            return false; // Hapus dari array
+        }
+        return true; // Tetap simpan
+    });
+
+    if (adaYangLewat) {
+        // Simpan daftar tugas baru yang sudah bersih dari tugas expired
+        localStorage.setItem('deepSeaTasks', JSON.stringify(tasksTetapAda));
+        
+        // Tampilkan pop-up sedih
+        showSadModal(namaTugasLewat);
+        
+        // Refresh tampilan list tugas di layar
+        renderAllTasks(); 
+    }
+}
+
+function showSadModal(listNama) {
+    const modal = document.getElementById('sadModal');
+    const msg = document.getElementById('sadMessage');
+    msg.innerHTML = `Tugas: <b>${listNama.join(", ")}</b> sudah hangus dan tenggelam karena melewati deadline. Jangan diulangi ya!`;
+    modal.style.display = 'block';
+}
+
+function closeSadModal() {
+    document.getElementById('sadModal').style.display = 'none';
+    location.reload(); // Refresh halaman agar list tugas terupdate
+}
+
+// Tambahkan fungsi ini untuk merender ulang list (opsional tapi bagus)
+function renderAllTasks() {
+    const container = document.getElementById('taskListContainer');
+    container.innerHTML = ''; // Kosongkan dulu
+    const tasks = JSON.parse(localStorage.getItem('deepSeaTasks')) || [];
+    tasks.forEach(t => displayTask(t));
+}
+
+// Pastikan checkExpiredTasks dipanggil saat web dibuka
+window.addEventListener('load', () => {
+    checkExpiredTasks();
+});
     </script>
 </body>
 </html>
