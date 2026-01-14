@@ -103,12 +103,39 @@ window.addEventListener('load', () => {
             localStorage.setItem('deepSeaTasks', JSON.stringify(tasks));
         }
 
-        function deleteTask(id, btn) {
-            btn.closest('.task-item').remove();
-            let tasks = JSON.parse(localStorage.getItem('deepSeaTasks'));
-            tasks = tasks.filter(t => t.id !== id);
-            localStorage.setItem('deepSeaTasks', JSON.stringify(tasks));
-        }
+        const quotes = [
+    "Satu tugas selesai, beban berkurang. Kamu hebat!",
+    "Jangan berhenti saat lelah, berhentilah saat selesai. Mantap!",
+    "Lautan yang tenang tidak menghasilkan pelaut yang tangguh. Terus berjuang!",
+    "Harta karun kesuksesan hanya untuk mereka yang tekun. Kerja bagus!",
+    "Setiap tugas selesai adalah satu gelembung kebahagiaan baru!"
+];
+
+function deleteTask(id, btn) {
+    // 1. Hapus tugas dari tampilan dan storage
+    btn.closest('.task-item').remove();
+    let tasks = JSON.parse(localStorage.getItem('deepSeaTasks'));
+    tasks = tasks.filter(t => t.id !== id);
+    localStorage.setItem('deepSeaTasks', JSON.stringify(tasks));
+
+    // 2. Munculkan Pop-up Motivasi
+    showMotivation();
+}
+
+function showMotivation() {
+    const modal = document.getElementById('motivationModal');
+    const quoteText = document.getElementById('motivationQuote');
+    
+    // Ambil kutipan acak
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    quoteText.innerText = `"${randomQuote}"`;
+    
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('motivationModal').style.display = 'none';
+}
 
 function checkDeadlines() {
     const tasks = JSON.parse(localStorage.getItem('deepSeaTasks')) || [];
