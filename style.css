@@ -164,3 +164,36 @@ td {
     color: var(--deep-sea);
     font-weight: bold;
 }
+
+/* Gaya Pop-up Motivasi */
+.modal-motivation {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 24, 39, 0.95);
+    border: 2px solid #0a9396;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 0 30px rgba(10, 147, 150, 0.5);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    from { opacity: 0; scale: 0.5; }
+    to { opacity: 1; scale: 1; }
+}
+
+.modal-motivation h2 {
+    font-family: 'Pacifico', cursive;
+    color: #ee9b00;
+    margin-bottom: 10px;
+}
+
+.modal-motivation p {
+    color: #e9d8a6;
+    font-style: italic;
+}
