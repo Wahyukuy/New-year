@@ -197,3 +197,49 @@ td {
     color: #e9d8a6;
     font-style: italic;
 }
+
+/* Gaya Pop-up Sedih (Deadline Lewat) */
+.modal-sad {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(43, 0, 0, 0.95); /* Warna merah gelap */
+    border: 2px solid #ae2012;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 2000;
+    box-shadow: 0 0 30px rgba(174, 32, 18, 0.5);
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translate(-52%, -50%); }
+    25% { transform: translate(-48%, -50%); }
+    50% { transform: translate(-52%, -50%); }
+    100% { transform: translate(-50%, -50%); }
+}/* Gaya Pop-up Sedih (Deadline Lewat) */
+.modal-sad {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(43, 0, 0, 0.95); /* Warna merah gelap */
+    border: 2px solid #ae2012;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 2000;
+    box-shadow: 0 0 30px rgba(174, 32, 18, 0.5);
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translate(-52%, -50%); }
+    25% { transform: translate(-48%, -50%); }
+    50% { transform: translate(-52%, -50%); }
+    100% { transform: translate(-50%, -50%); }
+}
