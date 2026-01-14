@@ -243,3 +243,36 @@ td {
     50% { transform: translate(-52%, -50%); }
     100% { transform: translate(-50%, -50%); }
 }
+
+/* Styling untuk Hewan Laut */
+.sea-creature {
+    position: absolute;
+    width: auto;
+    height: 80px; /* Ukuran default */
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: swim linear infinite; /* Animasi berenang */
+    z-index: 1; /* Di belakang card, di depan gelembung */
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5)); /* Efek bayangan ringan */
+}
+
+/* Ukuran spesifik untuk beberapa hewan */
+.sea-creature.small { height: 50px; }
+.sea-creature.medium { height: 100px; }
+.sea-creature.large { height: 150px; }
+.sea-creature.megalodon { height: 250px; }
+
+/* Posisi dan kecepatan berenang */
+.creature-1 { top: 10%; left: -150px; animation-duration: 25s; animation-delay: 0s; } /* Dori */
+.creature-2 { top: 20%; left: -200px; animation-duration: 30s; animation-delay: 5s; } /* Nemo */
+.creature-3 { top: 30%; left: -250px; animation-duration: 40s; animation-delay: 10s; } /* Lumba-lumba */
+
+.creature-4 { top: 60%; left: -300px; animation-duration: 50s; animation-delay: 15s; } /* Ikan Lampu */
+.creature-5 { top: 75%; left: -350px; animation-duration: 60s; animation-delay: 20s; } /* Ikan Pari */
+.creature-6 { top: 85%; left: -400px; animation-duration: 70s; animation-delay: 25s; } /* Megalodon */
+
+/* Animasi berenang dari kiri ke kanan */
+@keyframes swim {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(100vw + 400px)); } /* Berenang melewati layar */
+}
