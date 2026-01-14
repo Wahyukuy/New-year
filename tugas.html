@@ -60,6 +60,14 @@
                 return;
             }
 
+// Meminta izin notifikasi saat halaman dibuka
+window.addEventListener('load', () => {
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission();
+    }
+    checkDeadlines(); // Jalankan pengecekan saat mulai
+});
+            
             const taskObj = {
                 id: Date.now(),
                 name: taskName,
@@ -102,6 +110,39 @@
             localStorage.setItem('deepSeaTasks', JSON.stringify(tasks));
         }
 
+function checkDeadlines() {
+    const tasks = JSON.parse(localStorage.getItem('deepSeaTasks')) || [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    tasks.forEach(task => {
+        const deadlineDate = new Date(task.date);
+        deadlineDate.setHours(0, 0, 0, 0);
+
+        // Hitung selisih hari
+        const diffTime = deadlineDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 1) {
+            sendNotification("📢 Pengingat Deadline!", `Tugas "${task.name}" harus dikumpul BESOK!`);
+        } else if (diffDays === 0) {
+            sendNotification("⚠️ DEADLINE HARI INI!", `Tugas "${task.name}" harus dikumpul SEKARANG!`);
+        }
+    });
+}
+
+function sendNotification(title, message) {
+    if (Notification.permission === 'granted') {
+        new Notification(title, {
+            body: message,
+            icon: 'https://cdn-icons-png.flaticon.com/512/1041/1041916.png' // Icon ombak/tugas
+        });
+    }
+}
+
+        // Cek setiap 1 jam (3600000 milidetik)
+setInterval(checkDeadlines, 1800000);
+        
         // Muat data saat halaman dibuka
         window.onload = function() {
             createBubbles(); // Tetap panggil gelembung dari script.js
